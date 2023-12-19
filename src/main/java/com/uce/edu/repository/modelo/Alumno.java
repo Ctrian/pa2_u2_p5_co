@@ -22,7 +22,7 @@ public class Alumno {
 	@Column(name = "alum_nombre")
 	private String nombre;
 
-	//metodos get y set
+	// metodos get y set
 	public Integer getId() {
 		return id;
 	}
