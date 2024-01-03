@@ -1,9 +1,5 @@
 package com.uce.edu.repository;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 import com.uce.edu.repository.modelo.Transferencia;
@@ -20,9 +16,9 @@ public class TransferenciaRepositoryImpl implements ITransferenciaRepository {
 	private EntityManager entityManager;
 
 	@Override
-	public Transferencia seleccionar(BigDecimal numero) {
+	public Transferencia seleccionar(Integer id) {
 		// TODO Auto-generated method stub
-		return this.entityManager.find(Transferencia.class, numero);
+		return this.entityManager.find(Transferencia.class, id);
 	}
 
 	@Override
@@ -39,29 +35,10 @@ public class TransferenciaRepositoryImpl implements ITransferenciaRepository {
 	}
 
 	@Override
-	public void eliminar(BigDecimal numero) {
+	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
-		Transferencia transferencia = this.seleccionar(numero);
+		Transferencia transferencia = this.seleccionar(id);
 		this.entityManager.remove(transferencia);
-	}
-
-	@Override
-	public BigDecimal nroFcat(BigDecimal bigDecimal) {
-		BigDecimal aux = BigDecimal.ZERO;
-		aux = aux.add(bigDecimal);
-		return aux;
-	}
-//
-	@Override
-	public List<Transferencia> reporteTransferencia() {
-//		// TODO Auto-generated method stub
-//		List<Transferencia> lista = base;
-//		int indice = 0;
-//		for (Transferencia trans : lista) {
-//			indice++;
-//			System.out.println(indice + ":" + trans);
-//		}
-		return null;
 	}
 	
 }

@@ -2,7 +2,7 @@ package com.uce.edu.repository;
 
 import org.springframework.stereotype.Repository;
 
-import com.uce.edu.repository.modelo.Ciudadano;
+import com.uce.edu.repository.modelo.Hotel;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -10,34 +10,34 @@ import jakarta.transaction.Transactional;
 
 @Repository
 @Transactional
-public class CiudadanoRepositoryImpl implements ICiudadanoRepository{
-
+public class HotelRepositoryImpl implements IHotelRepository {
+	
 	@PersistenceContext
 	private EntityManager entityManager;
 	
 	@Override
-	public Ciudadano seleccionar(Integer id) {
+	public Hotel seleccionar(Integer id) {
 		// TODO Auto-generated method stub
-		return this.entityManager.find(Ciudadano.class, id);
-	}
-	
-	@Override
-	public void insertar(Ciudadano ciudadano) {
-		// TODO Auto-generated method stub
-		this.entityManager.persist(ciudadano);
+		return this.entityManager.find(Hotel.class, id);
 	}
 
 	@Override
-	public void actualizar(Ciudadano ciudadano) {
+	public void insertar(Hotel hotel) {
 		// TODO Auto-generated method stub
-		this.entityManager.merge(ciudadano);
+		this.entityManager.persist(hotel);
+	}
+
+	@Override
+	public void actualizar(Hotel hotel) {
+		// TODO Auto-generated method stub
+		this.entityManager.merge(hotel);
 	}
 
 	@Override
 	public void eliminar(Integer id) {
 		// TODO Auto-generated method stub
-		Ciudadano ciudadano = this.seleccionar(id);
-		this.entityManager.remove(ciudadano);
+		Hotel hotel = this.seleccionar(id);
+		this.entityManager.remove(hotel);
 	}
 
 }
