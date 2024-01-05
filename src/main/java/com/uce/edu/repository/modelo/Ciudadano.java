@@ -64,4 +64,9 @@ public class Ciudadano {
 		this.empleado = empleado;
 	}
 
+	@Override
+	public String toString() {
+		return "Ciudadano [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", empleado=" + empleado + "]";
+	}
+
 }
