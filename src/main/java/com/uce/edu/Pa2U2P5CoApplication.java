@@ -3,25 +3,30 @@ package com.uce.edu;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.uce.edu.repository.modelo.Autor;
 import com.uce.edu.repository.modelo.Ciudadano;
 import com.uce.edu.repository.modelo.Empleado;
 import com.uce.edu.repository.modelo.Habitacion;
 import com.uce.edu.repository.modelo.Hotel;
+import com.uce.edu.repository.modelo.Libro;
 import com.uce.edu.service.ICiudadanoService;
 import com.uce.edu.service.IHotelService;
+import com.uce.edu.service.ILibroService;
 
 @SpringBootApplication
 public class Pa2U2P5CoApplication implements CommandLineRunner {
 
 	@Autowired
-	private IHotelService hotelService;
+	private ILibroService iLibroService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5CoApplication.class, args);
@@ -31,41 +36,34 @@ public class Pa2U2P5CoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		//Guardar
-		Hotel hotel2 = new Hotel(); 
-		hotel2.setDireccion("Gasca");
-		hotel2.setNombre("Coloso");
+		Libro libro = new Libro();
+		libro.setTitulo("Java");
+		libro.setFechaPublicacion(LocalDateTime.now());
 		
-		Habitacion habitacion1 = new Habitacion();
-		habitacion1.setClase("Economica");
-		habitacion1.setNumero("A1");
-		habitacion1.setHotel(hotel2);
+		Autor autor1 = new Autor();
+		autor1.setNacionalidad("Colombiana");
+		autor1.setNombre("Carmen");
+		//autor1.setLibros(null);
 		
-		Habitacion habitacion2 = new Habitacion();
-		habitacion2.setClase("Normal");
-		habitacion2.setNumero("A2");
-		habitacion2.setHotel(hotel2);
+		Autor autor2 = new Autor();
+		autor2.setNacionalidad("Austriaco");
+		autor2.setNombre("Benjamin");
+		//autor1.setLibros(null);
 		
-		List<Habitacion> habitaciones = new ArrayList<>();
-		habitaciones.add(habitacion1);
-		habitaciones.add(habitacion2);
-
-		hotel2.setHabitaciones(habitaciones);
-
-		this.hotelService.guardar(hotel2);
+		Set<Autor> autores = new HashSet<Autor>();
+		autores.add(autor1);
+		autores.add(autor2);
+		//Recibe un conjunto de autores
+		libro.setAutores(autores);
 		
-		//Actualizar
-		hotel2.setNombre("Swisottel");
-		hotel2.setDireccion("Centro");
-		this.hotelService.actualizar(hotel2);
+		Set<Libro> libros = new HashSet<Libro>();
+		libros.add(libro);
 		
-		//Eliminar
-		this.hotelService.eliminar(1);
+		autor1.setLibros(libros);
+		autor2.setLibros(libros);
 		
-		//Buscar
-		this.hotelService.buscar(2);
-		System.out.println(hotel2);
-		
+		//Al insertar el libro se insertaran los autores automaticamente por el Cascade
+		this.iLibroService.guardar(libro);
 	}
 
 }
