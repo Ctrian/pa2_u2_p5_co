@@ -32,6 +32,7 @@ public class Autor {
 	private String nacionalidad;
 	
 	@ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL)
+	//@ManyToMany(mappedBy = "autores")
 	private Set<Libro> libros;
 	
 	//metodos get y set

@@ -78,5 +78,4 @@ public class Libro {
 		return "Libro [id=" + id + ", titulo=" + titulo + ", fechaPublicacion=" + fechaPublicacion + "]";
 	}
 	
-	
 }
