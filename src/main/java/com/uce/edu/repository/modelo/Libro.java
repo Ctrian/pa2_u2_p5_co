@@ -33,6 +33,8 @@ public class Libro {
 	private LocalDateTime fechaPublicacion;
 
 	@ManyToMany(cascade = CascadeType.ALL)
+	//especificar la tabla de rompimiento que van a tener las dos entidades
+	//("Combino los nombres")
 	@JoinTable(name = "autor_libro",
 	//Tabla que elgimos como secundaria
 	joinColumns = @JoinColumn(name="auli_id_libro"),

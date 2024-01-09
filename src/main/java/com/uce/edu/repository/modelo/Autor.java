@@ -31,8 +31,8 @@ public class Autor {
 	@Column(name = "auto_nacionalidad")
 	private String nacionalidad;
 	
+	//Elijo a Autor como entidad principal
 	@ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL)
-	//@ManyToMany(mappedBy = "autores")
 	private Set<Libro> libros;
 	
 	//metodos get y set

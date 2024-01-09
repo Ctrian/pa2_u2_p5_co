@@ -7,11 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-//@Entity
-//@Table(name = "autor2")
+@Entity
+@Table(name = "autor2")
+//Entidad principal, (identifico con - "baja la pk")
 public class Autor2 {
 
 	@Id
@@ -27,8 +29,10 @@ public class Autor2 {
 	@Column(name = "auto_nacionalidad")
 	private String nacionalidad;
 	
+	//De la entidad AutorLibro
+	@OneToMany(mappedBy = "autor2")
 	private List<AutorLibro> autoresLibros;
-	
+
 	//metodos get y set
 	public Integer getId() {
 		return id;
@@ -52,6 +56,14 @@ public class Autor2 {
 
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
+	}
+	
+	public List<AutorLibro> getAutoresLibros() {
+		return autoresLibros;
+	}
+
+	public void setAutoresLibros(List<AutorLibro> autoresLibros) {
+		this.autoresLibros = autoresLibros;
 	}
 	
 	@Override
