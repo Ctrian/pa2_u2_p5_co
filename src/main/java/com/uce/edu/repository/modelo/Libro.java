@@ -12,37 +12,41 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "libro")
+@NamedQuery(name = "Libro.queryBuscarPorNombre", query = "SELECT l FROM Libro l WHERE l.titulo = : nombre")
+@NamedQuery(name = "Libro.queryBuscarPorFecha", query = "SELECT l FROM Libro l WHERE l.fechaPublicacion >= : fecha")
 public class Libro {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_libro")
 	@SequenceGenerator(name = "seq_libro", sequenceName = "seq_libro", allocationSize = 1)
-	
+
 	@Column(name = "libr_id")
 	private Integer id;
-	
+
 	@Column(name = "libr_titulo")
 	private String titulo;
-	
+
 	@Column(name = "libr_fecha_publicacion")
 	private LocalDateTime fechaPublicacion;
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	//especificar la tabla de rompimiento que van a tener las dos entidades
-	//("Combino los nombres")
+	// especificar la tabla de rompimiento que van a tener las dos entidades
+	// ("Combino los nombres")
 	@JoinTable(name = "autor_libro",
-	//Tabla que elgimos como secundaria
-	joinColumns = @JoinColumn(name="auli_id_libro"),
-	//Tabla que elgimos como principal	
-	inverseJoinColumns = @JoinColumn(name="auli_id_autor"))
+			// Tabla que elgimos como secundaria
+			joinColumns = @JoinColumn(name = "auli_id_libro"),
+			// Tabla que elgimos como principal
+			inverseJoinColumns = @JoinColumn(name = "auli_id_autor"))
 	private Set<Autor> autores;
-	
-	//metodos get y set
+
+	// metodos get y set
 	public Integer getId() {
 		return id;
 	}
@@ -66,7 +70,7 @@ public class Libro {
 	public void setFechaPublicacion(LocalDateTime fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
-	
+
 	public Set<Autor> getAutores() {
 		return autores;
 	}
@@ -79,5 +83,5 @@ public class Libro {
 	public String toString() {
 		return "Libro [id=" + id + ", titulo=" + titulo + ", fechaPublicacion=" + fechaPublicacion + "]";
 	}
-	
+
 }

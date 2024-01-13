@@ -13,7 +13,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "autor2")
-//Entidad principal, (identifico con - "baja la pk")
 public class Autor2 {
 
 	@Id

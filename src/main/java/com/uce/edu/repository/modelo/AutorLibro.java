@@ -23,6 +23,9 @@ public class AutorLibro {
 
 	@Column(name = "auli_id")
 	private Integer id;
+	
+	@Column(name = "auli_fecha")
+	private LocalDateTime fecha;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	// aquí tengo la tabla de rompimiento;
@@ -33,9 +36,6 @@ public class AutorLibro {
 	@JoinColumn(name = "auli_id_libro")
 	private Libro2 libro2;
 	
-	@Column(name = "auli_fecha")
-	private LocalDateTime fecha;
-
 	//get y set
 	public Integer getId() {
 		return id;
