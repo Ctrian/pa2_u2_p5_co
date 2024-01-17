@@ -71,7 +71,7 @@ public class LibroRepositoryImpl implements ILibroRepository {
 		// SQL: SELECT * FROM libro l WHERE l.libr_fecha_publicacion >= ?
 		// JPQL: SELECT l FROM Libro l WHERE l.fechaPublicacion >= : fecha
 		Query myQuery = this.entityManager.createQuery("SELECT l FROM Libro l WHERE l.fechaPublicacion >= : fecha");
-		// busca "fecha" y reemplaza con fechaPublicacion
+		// busca "fecha" en el JPQL y reemplaza con fechaPublicacion
 		myQuery.setParameter("fecha", fechaPublicacion);
 		return (List<Libro>) myQuery.getResultList();
 	}

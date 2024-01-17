@@ -13,31 +13,42 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "ciudadano")
 public class Ciudadano {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_ciudadano")
 	@SequenceGenerator(name = "seq_ciudadano", sequenceName = "seq_ciudadano", allocationSize = 1)
-	
+
 	@Column(name = "ciud_id")
 	private Integer id;
-	
+
+	@Column(name = "ciud_cedula")
+	private String cedula;
+
 	@Column(name = "ciud_nombre")
 	private String nombre;
-	
+
 	@Column(name = "ciud_apellido")
 	private String apellido;
 
-	//mapear con el atributo de la clase ciudadano
+	// mapear con el atributo de la clase ciudadano
 	@OneToOne(mappedBy = "ciudadano", cascade = CascadeType.ALL)
 	private Empleado empleado;
-	
-	//get y set
+
+	// get y set
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
 	}
 
 	public String getNombre() {
@@ -66,7 +77,8 @@ public class Ciudadano {
 
 	@Override
 	public String toString() {
-		return "Ciudadano [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", empleado=" + empleado + "]";
+		return "Ciudadano [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", empleado=" + empleado + "]";
 	}
 
 }

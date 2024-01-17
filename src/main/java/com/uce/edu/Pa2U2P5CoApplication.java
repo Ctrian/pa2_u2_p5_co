@@ -11,22 +11,18 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.uce.edu.repository.modelo.Autor2;
 import com.uce.edu.repository.modelo.AutorLibro;
+import com.uce.edu.repository.modelo.Ciudadano;
+import com.uce.edu.repository.modelo.Empleado;
 import com.uce.edu.repository.modelo.Libro;
 import com.uce.edu.repository.modelo.Libro2;
+import com.uce.edu.service.ICiudadanoService;
 import com.uce.edu.service.ILibroService;
 
 @SpringBootApplication
 public class Pa2U2P5CoApplication implements CommandLineRunner {
 
-	// 1. Query (JPQL)
-	// 1.1 TypedQuery
-	// 1.2 NamedQuery
-
-	// 2. Native Query
-	// 3. Criteria API Query
-
 	@Autowired
-	private ILibroService iLibroService;
+	private ICiudadanoService ciudadanoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5CoApplication.class, args);
@@ -35,30 +31,24 @@ public class Pa2U2P5CoApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
-		System.out.println("Query");
-		List<Libro> lista = this.iLibroService.buscarPorFecha(LocalDateTime.of(1800, 1, 1, 7, 15));
-		for (Libro libro : lista) {
-			System.out.println(libro);
-		}
 
-		System.out.println("TypedQuery");
+		Empleado empleado = new Empleado();
 
-		Libro li1 = this.iLibroService.buscarPorNombre("Kotlin/Java");
-		System.out.println(li1);
+		Ciudadano ciudadano = new Ciudadano();
+		ciudadano.setNombre("Ctrian");
+		ciudadano.setApellido("Oli");
+		ciudadano.setCedula("1717");
+		ciudadano.setEmpleado(empleado);
 
-		List<Libro> lista2 = this.iLibroService.buscarPorFecha(LocalDateTime.of(1800, 1, 1, 7, 15));
-		for (Libro libro : lista2) {
-			System.out.println(libro);
-		}
+		empleado.setCiudadano(ciudadano);
 
-		System.out.println("NamedQuery");
-		Libro li2 = this.iLibroService.buscarPorNombreNamed("Kotlin/Java");
-		System.out.println(li2);
+		this.ciudadanoService.guardar(ciudadano);
 
-		List<Libro> lista3 = this.iLibroService.buscarPorFechaNamed(LocalDateTime.of(1800, 1, 1, 7, 15));
-		for (Libro libro : lista3) {
-			System.out.println(libro);
-		}
+		Empleado emp = this.ciudadanoService.buscarPorCedula("1717");
+		System.out.println(emp);
+
+		Ciudadano ciu = this.ciudadanoService.buscarPorCedulaCiu("1717");
+		System.out.println(ciu);
 	}
 
 }
