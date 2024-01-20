@@ -1,28 +1,23 @@
 package com.uce.edu;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.repository.modelo.Autor2;
-import com.uce.edu.repository.modelo.AutorLibro;
-import com.uce.edu.repository.modelo.Ciudadano;
-import com.uce.edu.repository.modelo.Empleado;
-import com.uce.edu.repository.modelo.Libro;
-import com.uce.edu.repository.modelo.Libro2;
-import com.uce.edu.service.ICiudadanoService;
-import com.uce.edu.service.ILibroService;
+import com.uce.edu.repository.modelo.Administrador;
+import com.uce.edu.repository.modelo.Asistente;
+import com.uce.edu.service.IAdministradorService;
+import com.uce.edu.service.IAsistenteService;
 
 @SpringBootApplication
 public class Pa2U2P5CoApplication implements CommandLineRunner {
 
 	@Autowired
-	private ICiudadanoService ciudadanoService;
+	private IAdministradorService administradorService;
+
+	@Autowired
+	private IAsistenteService asistenteService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5CoApplication.class, args);
@@ -32,23 +27,45 @@ public class Pa2U2P5CoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		Empleado empleado = new Empleado();
+		Administrador administrador = new Administrador();
+		administrador.setNombre("Ctrian");
+		administrador.setApellido("Oli");
+		administrador.setCedula("1750");
+		administrador.setArea_cargo("Ventas");
+		administrador.setDireccion("Guamani");
 
-		Ciudadano ciudadano = new Ciudadano();
-		ciudadano.setNombre("Ctrian");
-		ciudadano.setApellido("Oli");
-		ciudadano.setCedula("1717");
-		ciudadano.setEmpleado(empleado);
+		this.administradorService.guardar(administrador);
 
-		empleado.setCiudadano(ciudadano);
+		Asistente asistente = new Asistente();
+		asistente.setNombre("George");
+		asistente.setApellido("Luca");
+		asistente.setCedula("1720");
+		asistente.setDireccion("Condado");
+		asistente.setHobbie("Bailar");
+		
+		this.asistenteService.guardar(asistente);
 
-		this.ciudadanoService.guardar(ciudadano);
+		// Typed
+		this.administradorService.buscarPorCargo("Ventas");
 
-		Empleado emp = this.ciudadanoService.buscarPorCedula("1717");
-		System.out.println(emp);
+		this.administradorService.buscarPorCedula("1750");
 
-		Ciudadano ciu = this.ciudadanoService.buscarPorCedulaCiu("1717");
-		System.out.println(ciu);
+		this.asistenteService.buscarPorCedula("1720");
+
+		this.asistenteService.buscarPorNombre("George");
+
+		this.asistenteService.buscarPorHobie("Bailar");
+
+		// Native
+		this.administradorService.buscarPorCedulaNat("1750");
+
+		this.administradorService.buscarPorDireccion("Guamani");
+
+		this.asistenteService.buscarPorCedulaNat("1720");
+
+		this.asistenteService.buscarPorDireccionNat("Condado");
+
+		this.asistenteService.buscarPorHobieNat("Bailar");
 	}
 
 }

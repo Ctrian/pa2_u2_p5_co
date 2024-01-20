@@ -1,10 +1,13 @@
 package com.uce.edu.repository.modelo;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -30,6 +33,13 @@ public class Asistente {
 
 	@Column(name = "asist_direccion")
 	private String direccion;
+
+	@Column(name = "asist_hobbie")
+	private String hobbie;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "asist_id_admin")
+	private Administrador administrador;
 
 	// metodos get y set
 	public Integer getId() {
@@ -70,6 +80,22 @@ public class Asistente {
 
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
+	}
+
+	public String getHobbie() {
+		return hobbie;
+	}
+
+	public void setHobbie(String hobbie) {
+		this.hobbie = hobbie;
+	}
+
+	public Administrador getAdministrador() {
+		return administrador;
+	}
+
+	public void setAdministrador(Administrador administrador) {
+		this.administrador = administrador;
 	}
 
 }

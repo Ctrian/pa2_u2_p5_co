@@ -1,10 +1,14 @@
 package com.uce.edu.repository.modelo;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -25,11 +29,17 @@ public class Administrador {
 	@Column(name = "admin_apellido")
 	private String apellido;
 
+	@Column(name = "admin_cedula")
+	private String cedula;
+
 	@Column(name = "admin_direccion")
 	private String direccion;
 
 	@Column(name = "admin_area_cargo")
 	private String area_cargo;
+
+	@OneToMany(mappedBy = "administrador", cascade = CascadeType.ALL)
+	private List<Asistente> asistentes;
 
 	// metodos get y set
 	public Integer getId() {
@@ -56,6 +66,14 @@ public class Administrador {
 		this.apellido = apellido;
 	}
 
+	public String getCedula() {
+		return cedula;
+	}
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
 	public String getDireccion() {
 		return direccion;
 	}
@@ -70,6 +88,14 @@ public class Administrador {
 
 	public void setArea_cargo(String area_cargo) {
 		this.area_cargo = area_cargo;
+	}
+
+	public List<Asistente> getAsistentes() {
+		return asistentes;
+	}
+
+	public void setAsistentes(List<Asistente> asistentes) {
+		this.asistentes = asistentes;
 	}
 
 }
