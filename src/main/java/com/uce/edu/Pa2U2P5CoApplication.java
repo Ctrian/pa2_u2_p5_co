@@ -1,7 +1,5 @@
 package com.uce.edu;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,20 +7,19 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.uce.edu.repository.modelo.Autor2;
-import com.uce.edu.repository.modelo.AutorLibro;
-import com.uce.edu.repository.modelo.Ciudadano;
-import com.uce.edu.repository.modelo.Empleado;
-import com.uce.edu.repository.modelo.Libro;
-import com.uce.edu.repository.modelo.Libro2;
-import com.uce.edu.service.ICiudadanoService;
-import com.uce.edu.service.ILibroService;
+import com.uce.edu.repository.modelo.Administrador;
+import com.uce.edu.repository.modelo.Asistente;
+import com.uce.edu.service.IAdministradorService;
+import com.uce.edu.service.IAsistenteService;
 
 @SpringBootApplication
 public class Pa2U2P5CoApplication implements CommandLineRunner {
 
 	@Autowired
-	private ICiudadanoService ciudadanoService;
+	private IAdministradorService administradorService;
+
+	@Autowired
+	private IAsistenteService asistenteService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P5CoApplication.class, args);
@@ -32,23 +29,68 @@ public class Pa2U2P5CoApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 
-		Empleado empleado = new Empleado();
+		Administrador administrador1 = new Administrador();
+		administrador1.setNombre("Ctrian");
+		administrador1.setApellido("Oli");
+		administrador1.setCedula("1750");
+		administrador1.setArea_cargo("Ventas");
+		administrador1.setDireccion("Guamani");
 
-		Ciudadano ciudadano = new Ciudadano();
-		ciudadano.setNombre("Ctrian");
-		ciudadano.setApellido("Oli");
-		ciudadano.setCedula("1717");
-		ciudadano.setEmpleado(empleado);
+		this.administradorService.guardar(administrador1);
 
-		empleado.setCiudadano(ciudadano);
+		Administrador administrador2 = new Administrador();
+		administrador2.setNombre("Daniel");
+		administrador2.setApellido("Vega");
+		administrador2.setCedula("1725");
+		administrador2.setArea_cargo("Ventas");
+		administrador2.setDireccion("Caupicho");
 
-		this.ciudadanoService.guardar(ciudadano);
+		this.administradorService.guardar(administrador2);
 
-		Empleado emp = this.ciudadanoService.buscarPorCedula("1717");
-		System.out.println(emp);
+		Asistente asistente = new Asistente();
+		asistente.setNombre("George");
+		asistente.setApellido("Luca");
+		asistente.setCedula("1720");
+		asistente.setDireccion("Condado");
+		asistente.setHobbie("Bailar");
 
-		Ciudadano ciu = this.ciudadanoService.buscarPorCedulaCiu("1717");
-		System.out.println(ciu);
+		this.asistenteService.guardar(asistente);
+
+		// Typed
+		System.out.println("5 con Typed: ");
+		List<Administrador> lista = this.administradorService.buscarPorCargo("Ventas");
+		for (Administrador administrador : lista) {
+			System.out.println(administrador);
+		}
+
+		administrador1 = this.administradorService.buscarPorCedula("1750");
+		System.out.println(administrador1);
+
+		asistente = this.asistenteService.buscarPorCedula("1720");
+		System.out.println(asistente);
+
+		asistente = this.asistenteService.buscarPorNombre("George");
+		System.out.println(asistente);
+
+		asistente = this.asistenteService.buscarPorHobie("Bailar");
+		System.out.println(asistente);
+
+		// Native
+		System.out.println("5 con Native: ");
+		administrador1 = this.administradorService.buscarPorCedulaNat("1750");
+		System.out.println(administrador1);
+
+		administrador1 = this.administradorService.buscarPorDireccion("Guamani");
+		System.out.println(administrador1);
+
+		asistente = this.asistenteService.buscarPorCedulaNat("1720");
+		System.out.println(asistente);
+
+		asistente = this.asistenteService.buscarPorDireccionNat("Condado");
+		System.out.println(asistente);
+
+		asistente = this.asistenteService.buscarPorHobieNat("Bailar");
+		System.out.println(asistente);
 	}
 
 }
