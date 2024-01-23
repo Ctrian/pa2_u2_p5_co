@@ -71,16 +71,17 @@ public class CiudadanoRepositoryImpl implements ICiudadanoRepository {
 		// JPQL: SELECT c FROM Ciudadano c WHERE c.apellido = : variable
 		// 0. Creamos una instancia de la interfaz CriteriaBuilder a partir de un
 		// EntityManager
-
 		CriteriaBuilder myCriteriaBuilder = this.entityManager.getCriteriaBuilder();
+		
 		// 1. Determinamos el tipo de retorno que va a tener mi consulta
-
 		CriteriaQuery<Ciudadano> myCriteriaQuery = myCriteriaBuilder.createQuery(Ciudadano.class);
+		
 		// 2. Construir nuestro SQL
 		// 2.1 Determinar el FROM, lo utilizaremos a traves de una interfaz conocida
 		// como (Root)
 		// Nota: No necesariamente el from es igual al tipo de retorno
 		Root<Ciudadano> myFrom = myCriteriaQuery.from(Ciudadano.class); // "FROM Ciudadano"
+		
 		// 2.2 Construir las condiciones (WHERE) del SQL
 		// En criteria API Query las condiciones se las conoce como "Predicate"
 		// c.apellido = : variable

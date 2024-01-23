@@ -110,10 +110,4 @@ public class LibroRepositoryImpl implements ILibroRepository {
 		return myQuery.getResultList();
 	}
 
-	@Override
-	public List<Libro> seleccionarPorFechaPublicacionNamed(LocalDateTime fechaPublicacion) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

@@ -10,22 +10,23 @@ public interface ILibroRepository {
 	// CRUD
 	public Libro seleccionar(Integer id);
 
-	public Libro seleccionarPorTitulo(String titulo);
-
-	// typed
-	public Libro seleccionarPorNombre(String nombre);
-
 	public void insertar(Libro libro);
-
-	public void insertar(Libro2 libro2);
 
 	public void actualizar(Libro libro);
 
 	public void eliminar(Integer id);
 
+	//
+	public void insertar(Libro2 libro2);
+
+	// Query
+	public Libro seleccionarPorTitulo(String titulo);
+
 	public List<Libro> seleccionarPorFechaPublicacion(LocalDateTime fechaPublicacion);
 
 	// typed
+	public Libro seleccionarPorNombre(String nombre);
+
 	public List<Libro> seleccionarPorFecha(LocalDateTime fechaPublicacion);
 
 	// named
@@ -33,5 +34,4 @@ public interface ILibroRepository {
 
 	public List<Libro> seleccionarPorFechaNamed(LocalDateTime fechaPublicacion);
 
-	public List<Libro> seleccionarPorFechaPublicacionNamed(LocalDateTime fechaPublicacion);
 }

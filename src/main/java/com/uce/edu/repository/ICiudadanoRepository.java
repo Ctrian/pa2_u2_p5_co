@@ -13,10 +13,12 @@ public interface ICiudadanoRepository {
 
 	public void eliminar(Integer id);
 
+	//
 	public Empleado seleccionarPorCedula(String cedula);
 
 	public Ciudadano seleccionarPorCedulaCiu(String cedula);
 
+	// Criteria API Query
 	public Ciudadano seleccionarPorApellido(String apellido);
 
 	// Funcionalidad que
