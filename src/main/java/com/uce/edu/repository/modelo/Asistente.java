@@ -98,4 +98,10 @@ public class Asistente {
 		this.administrador = administrador;
 	}
 
+	@Override
+	public String toString() {
+		return "Asistente [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido
+				+ ", direccion=" + direccion + ", hobbie=" + hobbie + "]";
+	}
+
 }
